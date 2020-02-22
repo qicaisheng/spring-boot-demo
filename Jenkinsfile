@@ -29,12 +29,12 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                jacoco exclusionPattern: '**/test/**'
-            }
-        }
-
-
     }
+
+    post {
+        always {
+            jacoco exclusionPattern: '**/test/**'
+        }
+    }
+
 }
