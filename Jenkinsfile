@@ -17,7 +17,7 @@ pipeline {
         }
         stage("Build") {
             steps {
-                sh "cd complete && chmod 700 gradlew && ./gradlew clean build"
+                sh "chmod 700 gradlew && ./gradlew clean build"
             }
         }
     }
