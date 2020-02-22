@@ -20,5 +20,13 @@ pipeline {
                 sh "chmod 700 gradlew && ./gradlew clean build"
             }
         }
+        stage("Artifactory Publish") {
+            steps {
+                sh "docker build . -t spring-boot-demo"
+                sh "docker tag  spring-boot-demo $docker_registry_url/spring-boot-demo"
+                sh "docker push $docker_registry_url/spring-boot-demo"
+            }
+        }
+
     }
 }
