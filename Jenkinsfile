@@ -20,6 +20,13 @@ pipeline {
                 sh "chmod 700 gradlew && ./gradlew clean build"
             }
         }
+        stage("Sonar") {
+            steps {
+                withCredentials([string(credentialsId: 'sonar-host-url', variable: 'sonar_host_url')]) {
+                    sh "./gradlew sonarqube -Dsonar.host.url=$sonar_host_url -x test"
+                }
+            }
+        }
         stage("Artifactory Publish") {
             steps {
                 withCredentials([string(credentialsId: 'docker-registry-url', variable: 'docker_registry_url')]) {
